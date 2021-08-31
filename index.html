@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoアプリ</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>ToDoアプリ</h1>
+
+<input type="text" id="title">
+<button id="add">add</button>
+<div id="view"></div>
+
+<script>
+const titles = [];
+
+// 追加イベント
+$('#add').on('click',function(){
+    // viewに表示されているものは削除するempty();
+    $('#view').empty();
+    // #titleのvalueを取得する
+    const t = $('#title').val();
+    // 配列にvalueを追加する（push関数）
+    titles.push(t);
+    // #viewに表示する
+    titles.map((title,i) => $('#view').prepend('<div class="delete" data-titles="'+i+'">'+titles[i]+'</div>'));
+    // for(let i=0; i<titles.length; i++){
+    //     $('#view').prepend('<div class="delete" data-titles="'+i+'">'+titles[i]+'</div>');
+    // }
+});
+
+// 削除イベント
+$('div').on('click','.delete',function(){
+    // #viewの中を空にする
+    $('#view').empty();
+    // 配列から1つ削除する
+    titles.splice($(this).attr('data-titles'), 1);
+    // 残りの配列を表示させる
+    titles.map((title,i) => $('#view').prepend('<div class="delete" data-titles="'+i+'">'+titles[i]+'</div>'));
+    // for(let i = 0; i < titles.length; i++){
+    //     $('#view').prepend('<div class="delete" data-titles="'+i+'">'+titles[i]+'</div>');
+    // }
+});
+
+</script>
+
+</body>
+</html>
